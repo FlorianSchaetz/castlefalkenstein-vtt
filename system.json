@@ -1,0 +1,29 @@
+{
+  "name": "castlefalkenstein",
+  "title": "Castle Falkenstein",
+  "description": "The Castle Falkenstein system for FoundryVTT!",
+  "version": "1.0.0",
+  "minimumCoreVersion": "0.5.5",
+  "compatibleCoreVersion": "0.7.0",
+  "templateVersion": 2,
+  "author": "Florian Schaetz",
+  "esmodules": ["module/castlefalkenstein.js"],
+  "styles": ["css/castlefalkenstein.css"],
+  "scripts": [],
+  "packs": [],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "gridDistance": 5,
+  "gridUnits": "ft",
+  "primaryTokenAttribute": "health",
+  "secondaryTokenAttribute": "power",
+  "url": "",
+  "manifest": "",
+  "download": "",
+  "license": "LICENSE.txt"
+}
