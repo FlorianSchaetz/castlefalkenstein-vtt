@@ -44,4 +44,17 @@ Hooks.once('init', async function() {
   Handlebars.registerHelper('toLowerCase', function(str) {
     return str.toLowerCase();
   });
+  
+  Handlebars.registerHelper('localizeSkill', function(str) {
+    return game.i18n.localize("CastleFalkenstein.Skill." + str.toLowerCase());
+  });
+  
+	Handlebars.registerHelper('ifCond', function(v1, v2, options) {
+		if(v1 === v2) {
+			return options.fn(this);
+		}
+		return options.inverse(this);
+	});
+  
+  
 });

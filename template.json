@@ -1,61 +1,223 @@
 {
-  "Actor": {
-    "types": ["character"],
-    "templates": {
-      "base": {
-        "health": {
-          "value": 10,
-          "min": 0,
-          "max": 10
+    "Actor": {
+        "types": ["character"],
+        "templates": {
+            "base": {
+                "health": {
+                    "value": 10,
+                    "min": 0,
+                    "max": 10
+                },
+                "power": {
+                    "value": 5,
+                    "min": 0,
+                    "max": 5
+                }
+            }
         },
-        "power": {
-          "value": 5,
-          "min": 0,
-          "max": 5
+        "character": {
+            "templates": ["base"],
+            "biography": "",
+            "attributes": {
+                "level": {
+                    "value": 1
+                }
+            },
+            "abilities": {
+                "str": {
+                    "value": 10
+                },
+                "dex": {
+                    "value": 10
+                },
+                "con": {
+                    "value": 10
+                },
+                "int": {
+                    "value": 10
+                },
+                "wis": {
+                    "value": 10
+                },
+                "cha": {
+                    "value": 10
+                }
+            },
+            "skills": {
+                "athletics": {
+                    "value": "AV",
+                    "suit": "clubs",
+					"fairy" : ""
+                },
+                "charisma": {
+                    "value": "AV",
+                    "suit": "hearts",
+					"fairy" : ""
+                },
+                "comeliness": {
+                    "value": "AV",
+                    "suit": "hearts",
+					"fairy" : ""
+                },
+                "connections": {
+                    "value": "AV",
+                    "suit": "spades",
+					"fairy" : ""
+                },
+                "courage": {
+                    "value": "AV",
+                    "suit": "hearts",
+					"fairy" : ""
+                },
+                "craftsmanship": {
+                    "value": "AV",
+                    "suit": "diamonds",
+					"fairy" : ""
+                },
+                "education": {
+                    "value": "AV",
+                    "suit": "diamonds",
+					"fairy" : ""
+                },
+                "etherealness": {
+                    "value": "AV",
+                    "suit": "spades",
+					"fairy" : "only"
+                },
+                "exchequer": {
+                    "value": "AV",
+                    "suit": "clubs",
+					"fairy" : ""
+                },
+                "fencing": {
+                    "value": "AV",
+                    "suit": "spades",
+					"fairy" : ""
+                },
+                "fisticuffs": {
+                    "value": "AV",
+                    "suit": "spades",
+					"fairy" : ""
+                },
+                "gambling": {
+                    "value": "AV",
+                    "suit": "diamonds",
+					"fairy" : ""
+                },
+                "glamour": {
+                    "value": "AV",
+                    "suit": "hearts",
+					"fairy" : "only"
+                },
+                "gunslinging": {
+                    "value": "AV",
+                    "suit": "spades",
+					"fairy" : ""
+                },
+                "helmsmanship": {
+                    "value": "AV",
+                    "suit": "diamonds",
+					"fairy" : ""
+                },
+                "invention": {
+                    "value": "AV",
+                    "suit": "diamonds",
+					"fairy" : ""
+                },
+                "kindredpowers": {
+                    "value": "AV",
+                    "suit": "spades",
+					"fairy" : "only"
+                },
+                "leadership": {
+                    "value": "AV",
+                    "suit": "hearts",
+					"fairy" : ""
+                },
+                "marksmanship": {
+                    "value": "AV",
+                    "suit": "spades",
+					"fairy" : ""
+                },
+                "mesmerism": {
+                    "value": "AV",
+                    "suit": "hearts",
+					"fairy" : ""
+                },
+                "motoring": {
+                    "value": "AV",
+                    "suit": "spades",
+					"fairy" : ""
+                },
+                "naturalsciences": {
+                    "value": "AV",
+                    "suit": "diamonds",
+					"fairy" : ""
+                },
+                "perception": {
+                    "value": "AV",
+                    "suit": "diamonds",
+					"fairy" : ""
+                },
+                "performance": {
+                    "value": "AV",
+                    "suit": "hearts",
+					"fairy" : ""
+                },
+                "physician": {
+                    "value": "AV",
+                    "suit": "diamonds",
+					"fairy" : ""
+                },
+                "physique": {
+                    "value": "AV",
+                    "suit": "spades",
+					"fairy" : ""
+                },
+                "reputation": {
+                    "value": "AV",
+                    "suit": "clubs",
+					"fairy" : ""
+                },
+                "riding": {
+                    "value": "AV",
+                    "suit": "spades",
+					"fairy" : ""
+                },
+                "socialgraces": {
+                    "value": "AV",
+                    "suit": "clubs",
+					"fairy" : ""
+                },
+                "sorcery": {
+                    "value": "AV",
+                    "suit": "diamonds",
+					"fairy" : "poor"
+                },
+                "stealth": {
+                    "value": "AV",
+                    "suit": "spades",
+					"fairy" : ""
+                },
+                "tinkering": {
+                    "value": "AV",
+                    "suit": "diamonds",
+					"fairy" : ""
+                }
+            }
         }
-      }
     },
-    "character": {
-      "templates": ["base"],
-      "biography": "",
-      "attributes": {
-        "level": {
-          "value": 1
+    "Item": {
+        "types": ["item"],
+        "templates": {
+            "base": {
+                "description": ""
+            }
+        },
+        "item": {
+            "templates": ["base"],
+            "quantity": 1,
+            "weight": 0
         }
-      },
-      "abilities": {
-        "str": {
-          "value": 10
-        },
-        "dex": {
-          "value": 10
-        },
-        "con": {
-          "value": 10
-        },
-        "int": {
-          "value": 10
-        },
-        "wis": {
-          "value": 10
-        },
-        "cha": {
-          "value": 10
-        }
-      }
     }
-  },
-  "Item": {
-    "types": ["item"],
-    "templates": {
-      "base": {
-        "description": ""
-      }
-    },
-    "item": {
-      "templates": ["base"],
-      "quantity": 1,
-      "weight": 0
-    }
-  }
 }

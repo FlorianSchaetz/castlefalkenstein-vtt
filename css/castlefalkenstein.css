@@ -84,6 +84,14 @@
   border: 1px solid #999;
 }
 
+.suit {
+	border: 0px;
+	height: 20px;
+	width: 20px;
+	max-height: 20px;
+	max-width: 20px;
+}
+
 .flex-group-left {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -121,8 +129,8 @@
 
 .castlefalkenstein .sheet-header {
   -webkit-box-flex: 0;
-  -ms-flex: 0 0 210px;
-  flex: 0 0 210px;
+  -ms-flex: 0 0 120px;
+  flex: 0 0 120px;
   overflow: hidden;
   display: -webkit-box;
   display: -ms-flexbox;

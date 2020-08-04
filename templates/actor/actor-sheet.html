@@ -4,7 +4,7 @@
     <header class="sheet-header">
         <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
         <div class="header-fields">
-            <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
+            <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'CastleFalkenstein.Name' }}"/></h1>
             {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
             use both the "grid" and "grid-Ncol" class where "N" can be any number
             from 1 to 12 and will create that number of columns.  --}}
@@ -13,36 +13,99 @@
               and it will add a small amount of padding, a border, and will
               center all of its child elements content and text. --}}
               <div class="resource flex-group-center">
-                  <label for="data.health.value" class="resource-label">Health</label>
+                  <label for="data.health.value" class="resource-label">{{ localize 'CastleFalkenstein.Health' }}</label>
                   <div class="resource-content flexrow flex-center flex-between">
                     <input type="text" name="data.health.value" value="{{data.health.value}}" data-dtype="Number"/>
                     <span> / </span>
                     <input type="text" name="data.health.max" value="{{data.health.max}}" data-dtype="Number"/>
                   </div>
-              </div>
-              <div class="resource flex-group-center">
-                  <label for="data.power.value" class="resource-label">Power</label>
-                  <div class="resource-content flexrow flex-center flex-between">
-                    <input type="text" name="data.power.value" value="{{data.power.value}}" data-dtype="Number"/>
-                    <span> / </span>
-                    <input type="text" name="data.power.max" value="{{data.power.max}}" data-dtype="Number"/>
-                  </div>
-              </div>
-          </div>
-          {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
-          use both the "grid" and "grid-Ncol" class where "N" can be any number
-          from 1 to 12 and will create that number of columns.  --}}
-          <div class="abilities grid grid-3col">
-            {{#each data.abilities as |ability key|}}
-              <div class="ability flexrow flex-group-center">
-                <label for="data.abilities.{{key}}.value" class="resource-label">{{key}}</label>
-                <input type="text" name="data.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
-                <span class="ability-mod rollable" data-roll="d20+@abilities.{{key}}.mod" data-label="{{key}}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-              </div>
-            {{/each}}
-          </div>
-        </div>
+              </div>              
+          </div>		  
+		</div>
     </header>
+		  
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="skills">
+		<a class="item" data-tab="skills-spades">{{ localize 'CastleFalkenstein.Physical' }}</a>
+        <a class="item" data-tab="skills-diamonds">{{ localize 'CastleFalkenstein.MentalIntellectual' }}</a>
+        <a class="item" data-tab="skills-hearts">{{ localize 'CastleFalkenstein.EmotionalRomantic' }}</a>
+		<a class="item" data-tab="skills-clubs">{{ localize 'CastleFalkenstein.SocialStatus' }}</a>		
+    </nav>		  
+		  
+	<!--{{!-- The grid classes are defined in scss/global/_grid.scss. To use,
+	use both the "grid" and "grid-Ncol" class where "N" can be any number
+	from 1 to 12 and will create that number of columns.  --}}
+	<div class="abilities grid grid-3col">
+	{{#each data.abilities as |ability key|}}
+	  <div class="ability flexrow flex-group-center">
+		<label for="data.abilities.{{key}}.value" class="resource-label">{{key}}</label>
+		<input type="text" name="data.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
+		<span class="ability-mod rollable" data-roll="d20+@abilities.{{key}}.mod" data-label="{{key}}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
+	  </div>
+	{{/each}}
+	</div>-->
+	
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+	
+		<div class="tab biography" data-group="skills" data-tab="skills-spades">
+			<div class="skills grid grid-3col">
+			{{#each data.skills as |skill key|}}
+			{{#ifCond skill.suit "spades"}}
+			  <div class="skill flexrow flex-group-center">
+				<label for="data.skills.{{key}}.value" class="resource-label">{{ localizeSkill key}}</label>
+				<input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}" data-dtype="String"/>
+				<img class="suit" src="systems/castlefalkenstein/templates/actor/{{skill.suit}}.png" title="{{skill.suit}}" />
+			  </div>
+			{{/ifCond}}
+			{{/each}}
+			</div>
+		</div>
+		
+		<div class="tab biography" data-group="skills" data-tab="skills-diamonds">
+			<div class="skills grid grid-3col">
+			{{#each data.skills as |skill key|}}
+			{{#ifCond skill.suit "diamonds"}}
+			  <div class="skill flexrow flex-group-center">
+				<label for="data.skills.{{key}}.value" class="resource-label">{{ localizeSkill key}}</label>
+				<input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}" data-dtype="String"/>
+				<img class="suit" src="systems/castlefalkenstein/templates/actor/{{skill.suit}}.png" title="{{skill.suit}}" />
+			  </div>
+			{{/ifCond}}
+			{{/each}}
+			</div>
+		</div>
+		
+		<div class="tab biography" data-group="skills" data-tab="skills-hearts">		
+			<div class="skills grid grid-3col">
+			{{#each data.skills as |skill key|}}
+			{{#ifCond skill.suit "hearts"}}
+			  <div class="skill flexrow flex-group-center">
+				<label for="data.skills.{{key}}.value" class="resource-label">{{ localizeSkill key}}</label>
+				<input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}" data-dtype="String"/>
+				<img class="suit" src="systems/castlefalkenstein/templates/actor/{{skill.suit}}.png" title="{{skill.suit}}" />
+			  </div>
+			{{/ifCond}}
+			{{/each}}
+			</div>
+		</div>
+		
+		<div class="tab biography" data-group="skills" data-tab="skills-clubs">
+			<div class="skills grid grid-3col">
+			{{#each data.skills as |skill key|}}
+			{{#ifCond skill.suit "clubs"}}
+			  <div class="skill flexrow flex-group-center">
+				<label for="data.skills.{{key}}.value" class="resource-label">{{ localizeSkill key}}</label>
+				<input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}" data-dtype="String"/>
+				<img class="suit" src="systems/castlefalkenstein/templates/actor/{{skill.suit}}.png" title="{{skill.suit}}" />
+			  </div>
+			{{/ifCond}}
+			{{/each}}
+			</div>
+		</div>
+	
+	</section>
+	
 
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">

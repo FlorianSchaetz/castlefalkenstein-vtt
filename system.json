@@ -1,7 +1,7 @@
 {
   "name": "castlefalkenstein",
   "title": "Castle Falkenstein",
-  "description": "The Castle Falkenstein system for FoundryVTT!",
+  "description": "The Castle Falkenstein system for FoundryVTT (no deck of cards support yet, though)!",
   "version": "1.0.0",
   "minimumCoreVersion": "0.5.5",
   "compatibleCoreVersion": "0.7.0",
