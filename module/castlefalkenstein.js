@@ -3,6 +3,8 @@ import { CastleFalkensteinActor } from "./actor/actor.js";
 import { CastleFalkensteinActorSheet } from "./actor/actor-sheet.js";
 import { CastleFalkensteinItem } from "./item/item.js";
 import { CastleFalkensteinItemSheet } from "./item/item-sheet.js";
+import { CastleFalkensteinMainDeckSheet } from "./item/maindeck-sheet.js";
+import { CastleFalkensteinPlayerDeckSheet } from "./item/playerdeck-sheet.js";
 
 
 Hooks.once('init', async function () {
@@ -13,8 +15,6 @@ Hooks.once('init', async function () {
 			sorcery : createDeck()
 		}
     };
-	
-	alert(game.castlefalkenstein.decks.fortune.size);
 
     Combat.prototype._getInitiativeFormula = function (combatant) {
         const actor = combatant.actor;
@@ -24,6 +24,11 @@ Hooks.once('init', async function () {
         return "" + init;
     };
 	
+	/**
+		This is currently not synchronized with the clients and only done this way to test the basic idea. 
+		
+		One of the next steps will be to move this over to an item and/or wait for the actual card deck implementation of Foundry VTT ;-)
+	*/
 	function createDeck()
 	{
 		var suits = ["spades", "clubs", "hearts", "diamonds"];
@@ -96,7 +101,9 @@ Hooks.once('init', async function () {
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("castlefalkenstein", CastleFalkensteinActorSheet, { makeDefault: true});
     Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("castlefalkenstein", CastleFalkensteinItemSheet, { makeDefault: true });
+    Items.registerSheet("castlefalkenstein", CastleFalkensteinItemSheet, { types: ["item"], makeDefault: true });
+	Items.registerSheet("castlefalkenstein", CastleFalkensteinMainDeckSheet, { types: ["maindeck"], makeDefault: false });
+	Items.registerSheet("castlefalkenstein", CastleFalkensteinPlayerDeckSheet, { types: ["playerdeck"], makeDefault: false });
 
     // If you need to add Handlebars helpers, here are a few useful examples:
     Handlebars.registerHelper('concat', function () {

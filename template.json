@@ -223,7 +223,7 @@
         }
     },
     "Item": {
-        "types": ["item"],
+        "types": ["item", "maindeck", "playerdeck"],
         "templates": {
             "base": {
                 "description": ""
@@ -233,6 +233,19 @@
             "templates": ["base"],
             "quantity": 1,
             "weight": 0
+        },
+		"maindeck": {
+            "templates": ["base"],
+            "quantity": 1,
+            "weight": 0,
+			"cards": [ { "value" : 6, "suit" : "spades" }]
+			
+        },
+		"playerdeck": {
+            "templates": ["base"],
+            "quantity": 1,
+            "weight": 0,
+			"cards": []
         }
     }
 }
