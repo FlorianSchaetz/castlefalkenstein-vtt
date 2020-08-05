@@ -14,12 +14,19 @@ Hooks.once('init', async function() {
   /**
    * Set an initiative formula for the system
    * @type {String}
-   */
+   
   CONFIG.Combat.initiative = {
-    formula: "1d20",
+    formula: "{{ skillToNumber @skills.perception.value }}",
     decimals: 2
   };
-
+  */
+    Combat.prototype._getInitiativeFormula = function(combatant) {
+	  const actor = combatant.actor;
+	  if ( !actor ) return "1d10";	  
+	  const init = skillToNumberFunction(actor.data.data.skills.perception.value);	  
+	  return "" + init;
+	};
+	
   // Define custom Entity classes
   CONFIG.Actor.entityClass = CastleFalkensteinActor;
   CONFIG.Item.entityClass = CastleFalkensteinItem;
@@ -55,6 +62,45 @@ Hooks.once('init', async function() {
 		}
 		return options.inverse(this);
 	});
+	
+	
+	const skillToNumberFunction = function(skill) {
+		
+		var string = "";
+		if (skill) {
+			string = skill.toUpperCase();
+		}
+		
+		if(string === "POOR" || string === "PR") {
+			return 2;
+		}
+		if(string === "AVERAGE" || string === "AV") {
+			return 4;
+		}
+		if(string === "GOOD" || string === "GD") {
+			return 6;
+		}
+		if(string === "GREAT" || string === "GR") {
+			return 8;
+		}
+		if(string === "EXCEPTIONAL" || string === "EXC") {
+			return 10;
+		}
+		if(string === "EXTRAORDINARY" || string === "EXT") {
+			return 12;
+		}
+		
+		return 0;
+	};
+	  
+	Handlebars.registerHelper('ifNotCond', function(v1, v2, options) {
+		if(v1 === v2) {
+			return options.inverse(this);
+		}
+		return options.fn(this);
+	});
+	
+	Handlebars.registerHelper('skillToNumber', skillToNumberFunction);
   
   
 });

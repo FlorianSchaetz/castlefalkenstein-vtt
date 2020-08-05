@@ -31,19 +31,6 @@
         <a class="item" data-tab="skills-hearts">{{ localize 'CastleFalkenstein.EmotionalRomantic' }}</a>
 		<a class="item" data-tab="skills-clubs">{{ localize 'CastleFalkenstein.SocialStatus' }}</a>		
     </nav>		  
-		  
-	<!--{{!-- The grid classes are defined in scss/global/_grid.scss. To use,
-	use both the "grid" and "grid-Ncol" class where "N" can be any number
-	from 1 to 12 and will create that number of columns.  --}}
-	<div class="abilities grid grid-3col">
-	{{#each data.abilities as |ability key|}}
-	  <div class="ability flexrow flex-group-center">
-		<label for="data.abilities.{{key}}.value" class="resource-label">{{key}}</label>
-		<input type="text" name="data.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
-		<span class="ability-mod rollable" data-roll="d20+@abilities.{{key}}.mod" data-label="{{key}}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-	  </div>
-	{{/each}}
-	</div>-->
 	
     {{!-- Sheet Body --}}
     <section class="sheet-body">
@@ -102,9 +89,18 @@
 			{{/ifCond}}
 			{{/each}}
 			</div>
-		</div>
-	
+		</div>	
 	</section>
+	
+	<div class="grid grid-4col">		
+		{{#each data.cards as |card key|}}	
+		{{#ifNotCond card.suit ""}}
+		<div class="flexrow flex-group-center">
+			<img src="systems/castlefalkenstein/templates/actor/card-backside.png" title="{{card.value}} of {{card.suit}}" />
+		</div>			
+		{{/ifNotCond}}		
+		{{/each}}		
+	</div>
 	
 
     {{!-- Sheet Tab Navigation --}}
