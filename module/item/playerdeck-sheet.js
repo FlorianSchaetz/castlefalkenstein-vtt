@@ -50,9 +50,22 @@ export class CastleFalkensteinPlayerDeckSheet extends ItemSheet {
   activateListeners(html) {
     super.activateListeners(html);
 
+    html.find('.rollable').click(this._onRoll.bind(this));
+
     // Everything below here is only needed if the sheet is editable
     if (!this.options.editable) return;
 
     // Roll handlers, click handlers, etc. would go here.
   }
+  
+    _onRoll(event) {
+	  event.preventDefault();
+	  const element = event.currentTarget;
+	  const dataset = element.dataset;
+	  
+	  if (element.id === "playerdeckclick")
+	  {
+		
+	  }
+	}
 }
