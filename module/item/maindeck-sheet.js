@@ -167,13 +167,13 @@ export class CastleFalkensteinMainDeckSheet extends ItemSheet {
 	  }
 	  
 	  var cards = player.data.data.cards;
-	  
+	  	  
 	  if (cards.length > 3) 
 	  {
 		  alert("This deck already has four cards.");
 		  return;
 	  }
-		
+			  
 	  var deck = this.item.data.data.cards;
 
 	  var card = deck.pop();
@@ -182,9 +182,10 @@ export class CastleFalkensteinMainDeckSheet extends ItemSheet {
 		  return;
 	  }
 	  
-	  cards.push(card);
+	  var newArray = cards.slice();
+	  newArray.push(card);
 	  player.update({
-		  "data.cards": cards
+		  "data.cards": newArray
 	  });
 	}
 	
