@@ -93,7 +93,7 @@
 	</section>
 	
 	<div class="grid grid-4col">		
-		{{#each data.cards as |card key|}}	
+		{{#each data.cards as |card|}}	
 		{{#ifNotCond card.suit ""}}
 		<div class="flexrow flex-group-center">
 			<img src="systems/castlefalkenstein/templates/actor/card-backside.png" title="{{card.value}} of {{card.suit}}" />

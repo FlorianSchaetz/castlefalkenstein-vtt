@@ -4,8 +4,6 @@ import { CastleFalkensteinActorSheet } from "./actor/actor-sheet.js";
 import { CastleFalkensteinItem } from "./item/item.js";
 import { CastleFalkensteinItemSheet } from "./item/item-sheet.js";
 import { CastleFalkensteinMainDeckSheet } from "./item/maindeck-sheet.js";
-import { CastleFalkensteinPlayerDeckSheet } from "./item/playerdeck-sheet.js";
-
 
 Hooks.once('init', async function () {
 
@@ -103,7 +101,6 @@ Hooks.once('init', async function () {
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("castlefalkenstein", CastleFalkensteinItemSheet, { types: ["item"], makeDefault: true });
 	Items.registerSheet("castlefalkenstein", CastleFalkensteinMainDeckSheet, { types: ["maindeck"], makeDefault: false });
-	Items.registerSheet("castlefalkenstein", CastleFalkensteinPlayerDeckSheet, { types: ["playerdeck"], makeDefault: false });
 
     // If you need to add Handlebars helpers, here are a few useful examples:
     Handlebars.registerHelper('concat', function () {

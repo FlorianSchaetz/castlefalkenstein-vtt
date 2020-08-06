@@ -60,8 +60,11 @@ export class CastleFalkensteinMainDeckSheet extends ItemSheet {
   
   initialize()
   {
-	var playerdecks = this.getPlayerDecks();
-	playerdecks.forEach( (d) => d.update( { "data.cards" : [] }) );
+	/*var playerdecks = this.getPlayerDecks();
+	playerdecks.forEach( (d) => d.update( { "data.cards" : [] }) );*/
+	
+	var players = this.getPlayers();
+	players.forEach( (p) => p.update( { "data.cards" : [] }) );
 	
 	var mainDeck = this.createDeck();
 	this.item.update( { "data.cards" : mainDeck } );
@@ -142,25 +145,63 @@ export class CastleFalkensteinMainDeckSheet extends ItemSheet {
 		  this.initialize();
 		  return;		  
 	  }
-
+	  
+	  if (element.id === "dealcard") 
+	  {
+		  this.dealCard();
+		  return;
+	  }	  
+	  
+	  console.error("Unhandled event in maindeck-sheet.js: %s", event);	  
+	}
+	
+	dealCard() {
+		
+	  var players = this.getPlayers();
+	  var player = players[0];
+	  
+	  if (!player)
+	  {
+		  alert("No player");
+		  return;
+	  }
+	  
+	  var cards = player.data.data.cards;
+	  
+	  if (cards.length > 3) 
+	  {
+		  alert("This deck already has four cards.");
+		  return;
+	  }
+		
 	  var deck = this.item.data.data.cards;
 
 	  var card = deck.pop();
 	  if (!card) {
-		  alert("No card");
+		  alert("No card left");
 		  return;
 	  }
-
-	  var playerdecks = this.getPlayerDecks();
-
-	  var cards = playerdecks[0].data.data.cards;
+	  
 	  cards.push(card);
-	  playerdecks[0].update({
+	  player.update({
 		  "data.cards": cards
 	  });
 	}
 	
-  getPlayerDecks() {
+
+	getPlayers() 
+	{
+		var players = [];
+		var allActors = ActorDirectory.collection;
+		allActors.forEach( (value, key) => {
+		  if (value.data.type === "character")
+			{
+				players.push(value);
+		}});
+		return players;
+	}
+
+	getPlayerDecks() {
 	  var allItems = game.items;
 	  var playerdecks = [];
 	  
