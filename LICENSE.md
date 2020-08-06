@@ -1,5 +1,3 @@
-Castle Falkenstein is published by and copyright of R. Talsorian Games.
-
 MIT License
 
 Copyright (c) 2020 Florian Schätz

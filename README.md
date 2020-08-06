@@ -1,6 +1,6 @@
 # castlefalkenstein-vtt
 
-A Castle Falkenstein system for FoundryVTT
+A Castle Falkenstein system for Foundry VTT
 
 Since Foundry VTT is currently lacking a system to support card decks, this is more of a playground for me, but perhaps it might be useful to some. 
 
@@ -17,5 +17,7 @@ To Do (next steps):
 + Checkboxes at cards, so that players can check cards and then do a skill check
 + Better skill list (only show skills that are not AV (average), allow to set others from list - should be much nicer and shorter)
 
+The base files of this system were created with Asacolips' generator-foundry:
+      https://www.npmjs.com/package/generator-foundry
 
 Castle Falkenstein is published by and copyright of R. Talsorian Games.
