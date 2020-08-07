@@ -9,7 +9,7 @@ export class CastleFalkensteinActorSheet extends ActorSheet {
     return mergeObject(super.defaultOptions, {
       classes: ["castlefalkenstein", "sheet", "actor"],
       template: "systems/castlefalkenstein/templates/actor/actor-sheet.html",
-      width: 600,
+      width: 800,
       height: 600,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
     });
@@ -84,6 +84,38 @@ export class CastleFalkensteinActorSheet extends ActorSheet {
     return this.actor.createOwnedItem(itemData);
   }
 
+  findSelectedCards(cards) {
+	  var selectedCards = [];
+	  if (cards.card0 && cards.card0.selected) {
+		  selectedCards.push(cards.card0);
+	  }
+	  if (cards.card1 && cards.card1.selected) {
+		  selectedCards.push(cards.card1);
+	  }
+	  if (cards.card2 && cards.card2.selected) {
+		  selectedCards.push(cards.card2);
+	  }
+	  if (cards.card3 && cards.card3.selected) {
+		  selectedCards.push(cards.card3);
+	  }
+	  return selectedCards;
+  }
+  
+    removeSelectedCards(cards) {	  
+	  if (cards.card0 && cards.card0.selected) {
+		  this.actor.update({"-=data.cards.card0" : null });
+	  }
+	  if (cards.card1 && cards.card1.selected) {
+		  this.actor.update({"-=data.cards.card1" : null });
+	  }
+	  if (cards.card2 && cards.card2.selected) {
+		  this.actor.update({"-=data.cards.card2" : null });
+	  }
+	  if (cards.card3 && cards.card3.selected) {
+		  this.actor.update({"-=data.cards.card3" : null });
+	  }
+  }
+
   /**
    * Handle clickable rolls.
    * @param {Event} event   The originating click event
@@ -94,6 +126,38 @@ export class CastleFalkensteinActorSheet extends ActorSheet {
     const element = event.currentTarget;
     const dataset = element.dataset;
 
+	  if (element.id.startsWith("skill"))
+	  {
+		  var skillName = element.id.substring(6);
+		  var skill = this.actor.data.data.skills[skillName];
+		  
+		  var selectedCards = [];
+		  var cards = this.actor.data.data.cards;
+		  
+		  var selectedCards = this.findSelectedCards(cards);
+
+		  const reducer = (accumulator, currentValue) => {
+			  if (skill.suit == currentValue.suit) {
+				  accumulator = currentValue.value + accumulator;				  
+			  }
+			  else {
+				  accumulator = accumulator+1;
+			  }
+			  
+			  return accumulator;
+		  }
+		  
+		  var result = selectedCards.reduce(reducer, 0) + this.skillToNumber(skill.value);
+
+		  console.log(result);
+		  
+		  this.removeSelectedCards(cards);
+		  
+		  return;
+	  }
+	  
+
+
     if (dataset.roll) {
       let roll = new Roll(dataset.roll, this.actor.data.data);
       let label = dataset.label ? `Rolling ${dataset.label}` : '';
@@ -102,6 +166,35 @@ export class CastleFalkensteinActorSheet extends ActorSheet {
         flavor: label
       });
     }
+  }
+  
+  skillToNumber(skill) {
+	  
+		var string = "";
+        if (skill) {
+            string = skill.toUpperCase();
+        }
+
+        if (string === "POOR" || string === "PR") {
+            return 2;
+        }
+        if (string === "AVERAGE" || string === "AV") {
+            return 4;
+        }
+        if (string === "GOOD" || string === "GD") {
+            return 6;
+        }
+        if (string === "GREAT" || string === "GR") {
+            return 8;
+        }
+        if (string === "EXCEPTIONAL" || string === "EXC") {
+            return 10;
+        }
+        if (string === "EXTRAORDINARY" || string === "EXT") {
+            return 12;
+        }
+
+        return 0;
   }
 
 }

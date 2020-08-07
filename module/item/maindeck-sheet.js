@@ -63,12 +63,19 @@ export class CastleFalkensteinMainDeckSheet extends ItemSheet {
 	/*var playerdecks = this.getPlayerDecks();
 	playerdecks.forEach( (d) => d.update( { "data.cards" : [] }) );*/
 	
-	var players = this.getPlayers();
-	players.forEach( (p) => p.update( { "data.cards" : [] }) );
+	var players = this.getPlayers();	
+	players.forEach( (p) => p.update( { "-=data.cards.card0" : null } ) );			
+	players.forEach( (p) => p.update( { "-=data.cards.card1" : null } ) );			
+	players.forEach( (p) => p.update( { "-=data.cards.card2" : null } ) );			
+	players.forEach( (p) => p.update( { "-=data.cards.card3" : null } ) );			
 	
 	var mainDeck = this.createDeck();
 	this.item.update( { "data.cards" : mainDeck } );
 	
+  }
+  
+  async updatePlayer(player, obj) {
+	  player.update(obj);
   }
   
    createDeck()
@@ -169,9 +176,9 @@ export class CastleFalkensteinMainDeckSheet extends ItemSheet {
 	  
 	  var cards = player.data.data.cards;
 	  	  
-	  if (cards.length > 3) 
+	  if (!this.hasEmptyField(cards))
 	  {
-		  alert("This deck already has four cards.");
+		  alert("Player has already 4 cards.");
 		  return;
 	  }
 			  
@@ -183,13 +190,34 @@ export class CastleFalkensteinMainDeckSheet extends ItemSheet {
 		  return;
 	  }
 	  
-	  var newArray = cards.slice();
-	  newArray.push(card);
-	  player.update({
-		  "data.cards": newArray
-	  });
+	  this.setCard(player, card);
 	}
 	
+	hasEmptyField(cards) 
+	{
+		if (cards.card0 && cards.card1 && cards.card2 && cards.card3 ) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	setCard(player, card) {
+		var cards = player.data.data.cards;
+		
+		if (!cards.card0) {
+			player.update({"data.cards.card0" : card});			
+		}
+		else if (!cards.card1) {
+			player.update({"data.cards.card1" : card});
+		}
+		else if (!cards.card2) {
+			player.update({"data.cards.card2" : card});
+		}
+		else if (!cards.card3) {
+			player.update({"data.cards.card3" : card});
+		}
+	}	
 
 	getPlayers() 
 	{

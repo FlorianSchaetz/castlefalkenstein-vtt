@@ -26,10 +26,18 @@
 		  
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="skills">
-		<a class="item" data-tab="skills-spades">{{ localize 'CastleFalkenstein.Physical' }}</a>
-        <a class="item" data-tab="skills-diamonds">{{ localize 'CastleFalkenstein.MentalIntellectual' }}</a>
-        <a class="item" data-tab="skills-hearts">{{ localize 'CastleFalkenstein.EmotionalRomantic' }}</a>
-		<a class="item" data-tab="skills-clubs">{{ localize 'CastleFalkenstein.SocialStatus' }}</a>		
+		<a class="item" data-tab="skills-spades">{{ localize 'CastleFalkenstein.Physical' }}
+		  <img class="suit" src="systems/castlefalkenstein/templates/actor/spades.png" title="Spades"/>
+		</a>
+        <a class="item" data-tab="skills-diamonds">{{ localize 'CastleFalkenstein.MentalIntellectual' }}
+		  <img class="suit" src="systems/castlefalkenstein/templates/actor/diamonds.png" title="diamonds"/>
+		</a>
+        <a class="item" data-tab="skills-hearts">{{ localize 'CastleFalkenstein.EmotionalRomantic' }}
+		  <img class="suit" src="systems/castlefalkenstein/templates/actor/hearts.png" title="hearts"/>
+		</a>
+		<a class="item" data-tab="skills-clubs">{{ localize 'CastleFalkenstein.SocialStatus' }}
+		  <img class="suit" src="systems/castlefalkenstein/templates/actor/clubs.png" title="clubs"/>
+		</a>		
     </nav>		  
 	
     {{!-- Sheet Body --}}
@@ -41,8 +49,8 @@
 			{{#ifCond skill.suit "spades"}}
 			  <div class="skill flexrow flex-group-center">
 				<label for="data.skills.{{key}}.value" class="resource-label">{{ localizeSkill key}}</label>
-				<input type="text" name="key" value="{{skill.value}}" data-dtype="String"/>
-				<img class="suit" src="systems/castlefalkenstein/templates/actor/{{skill.suit}}.png" title="{{skill.suit}}" />
+				<input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}" data-dtype="String"/>
+				<span class="rollable" id="skill-{{key}}">Roll</span>
 			  </div>
 			{{/ifCond}}
 			{{/each}}
@@ -56,7 +64,7 @@
 			  <div class="skill flexrow flex-group-center">
 				<label for="data.skills.{{key}}.value" class="resource-label">{{ localizeSkill key}}</label>
 				<input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}" data-dtype="String"/>
-				<img class="suit" src="systems/castlefalkenstein/templates/actor/{{skill.suit}}.png" title="{{skill.suit}}" />
+				<span class="rollable" id="skill-{{key}}">Roll</span>>
 			  </div>
 			{{/ifCond}}
 			{{/each}}
@@ -70,7 +78,7 @@
 			  <div class="skill flexrow flex-group-center">
 				<label for="data.skills.{{key}}.value" class="resource-label">{{ localizeSkill key}}</label>
 				<input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}" data-dtype="String"/>
-				<img class="suit" src="systems/castlefalkenstein/templates/actor/{{skill.suit}}.png" title="{{skill.suit}}" />
+				<span class="rollable" id="skill-{{key}}">Roll</span>
 			  </div>
 			{{/ifCond}}
 			{{/each}}
@@ -84,7 +92,7 @@
 			  <div class="skill flexrow flex-group-center">
 				<label for="data.skills.{{key}}.value" class="resource-label">{{ localizeSkill key}}</label>
 				<input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}" data-dtype="String"/>
-				<img class="suit" src="systems/castlefalkenstein/templates/actor/{{skill.suit}}.png" title="{{skill.suit}}" />
+				<span class="rollable" id="skill-{{key}}">Roll</span>
 			  </div>
 			{{/ifCond}}
 			{{/each}}
@@ -93,13 +101,13 @@
 	</section>
 	
 	<div class="grid grid-4col">		
-		{{#each data.cards as |card|}}	
-		{{#ifNotCond card.suit ""}}
+		{{#each data.cards as |card key|}}	
+		{{#ifNotUndefined card}}
 		<div class="flexrow flex-group-center">
 			<img src="systems/castlefalkenstein/templates/actor/card-backside.png" title="{{card.value}} of {{card.suit}}" />
-			<input type="checkbox" name="data.cards.{{@key}}.selected" {{checked card.selected}}/>
+			<input id="{{@key}}" card-class="cardbox" type="checkbox" name="data.cards.{{key}}.selected" {{checked card.selected}}/>
 		</div>			
-		{{/ifNotCond}}		
+		{{/ifNotUndefined}}		
 		{{/each}}		
 	</div>
 	

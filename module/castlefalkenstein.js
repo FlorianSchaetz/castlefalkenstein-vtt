@@ -134,6 +134,14 @@ Hooks.once('init', async function () {
         }
         return options.fn(this);
     });
+	
+	Handlebars.registerHelper('ifNotUndefined', function (v1, options) {
+        if (!v1) {
+			return options.inverse(this);        	
+        }
+		return options.fn(this);    
+		
+    });
 
     const skillToNumberFunction = function (skill) {
 
