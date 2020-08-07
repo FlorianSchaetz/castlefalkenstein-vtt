@@ -93,6 +93,7 @@ export class CastleFalkensteinMainDeckSheet extends ItemSheet {
 		var card = {					
 					suit : suit,
 					value : value,
+					selected : false,
 					name : this.cardName(value, suit)
 				};
 		return card;

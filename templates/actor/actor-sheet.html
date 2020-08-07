@@ -41,7 +41,7 @@
 			{{#ifCond skill.suit "spades"}}
 			  <div class="skill flexrow flex-group-center">
 				<label for="data.skills.{{key}}.value" class="resource-label">{{ localizeSkill key}}</label>
-				<input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}" data-dtype="String"/>
+				<input type="text" name="key" value="{{skill.value}}" data-dtype="String"/>
 				<img class="suit" src="systems/castlefalkenstein/templates/actor/{{skill.suit}}.png" title="{{skill.suit}}" />
 			  </div>
 			{{/ifCond}}
@@ -97,6 +97,7 @@
 		{{#ifNotCond card.suit ""}}
 		<div class="flexrow flex-group-center">
 			<img src="systems/castlefalkenstein/templates/actor/card-backside.png" title="{{card.value}} of {{card.suit}}" />
+			<input type="checkbox" name="data.cards.{{@key}}.selected" {{checked card.selected}}/>
 		</div>			
 		{{/ifNotCond}}		
 		{{/each}}		
