@@ -1,3 +1,5 @@
+import PlayerSelectDialog from "../item/player-select-dialog.js";
+
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
@@ -101,9 +103,43 @@ export class CastleFalkensteinMainDeckSheet extends ItemSheet {
 					suit : suit,
 					value : value,
 					selected : false,
-					name : this.cardName(value, suit)
+					name : this.cardName(value, suit),
+					filename : this.cardFileName(value, suit)
 				};
 		return card;
+	}
+	
+	cardFileName(value, suit)
+	{
+		if (!value)
+			return "";
+		
+		if (value < 11) 
+		{	
+			return "" + value + "_of_" + suit + ".png";
+		}
+		
+		if (value == 11) 
+		{
+			return "jack_of_" + suit + ".png";
+		}
+		
+		if (value == 12) 
+		{
+			return "queen_of_" + suit + ".png";
+		}
+		
+		if (value == 13) 
+		{
+			return "king_of_" + suit + ".png";
+		}
+		
+		if (value == 14) 
+		{
+			return "red_joker.png";
+		}
+		
+		return "";
 	}
 	
 	cardName(value, suit)
@@ -156,41 +192,97 @@ export class CastleFalkensteinMainDeckSheet extends ItemSheet {
 	  
 	  if (element.id === "dealcard") 
 	  {
-		  this.dealCard();
+		  (async () => {
+			await this.choosePlayerAndDeal();
+		 })();
+		  
+		  return;
+	  }	  
+	  
+	  if (element.id === "dealcardfirst") 
+	  {
+		  (async () => {
+			await this.dealToFirstPlayer();
+		 })();
+		  
+		  return;
+	  }	  
+	  
+	  if (element.id === "dealcardall") 
+	  {
+		  (async () => {
+			await this.dealCardsToAllPlayers();
+		 })();
+		  
 		  return;
 	  }	  
 	  
 	  console.error("Unhandled event in maindeck-sheet.js: %s", event);	  
 	}
+
+  
+	async dealCardToSinglePlayer(player)
+	{
+		if (!player)
+		{
+			alert("No player");
+			return;
+		}	  
+		
+		var cards = player.data.data.cards;
+	  	  
+		while(this.hasEmptyField(cards))
+		{
+			var deck = this.item.data.data.cards;
+
+			var card = deck.pop();
+			if (!card) {
+				alert("No card left");
+				return;
+			}
+
+			console.log("Dealt " + card.name + "to " + player.name);
+			await this.setCard(player, card);
+			
+			cards = player.data.data.cards;
+		}
+	}
 	
-	dealCard() {
+	async dealToFirstPlayer()
+	{
+		
+		var players = getPlayers();
+		var player = players[0];
+		
+		await this.dealCardToSinglePlayer(player);
+		
+	}
+	
+	async choosePlayerAndDeal()
+	{
+		const usage = await PlayerSelectDialog.create(this);
+		var chosenPlayerName = usage.get("currentPlayerName");
+		
+		var players = this.getPlayers();
+		players.forEach( (p) => {
+			
+			if (p.name == chosenPlayerName) 
+			{
+				this.dealCardToSinglePlayer(p);
+			}
+			
+		} );		
+	}
+	
+	
+	async dealCardsToAllPlayers() {
 		
 	  var players = this.getPlayers();
-	  var player = players[0];
 	  
-	  if (!player)
-	  {
-		  alert("No player");
-		  return;
-	  }
-	  
-	  var cards = player.data.data.cards;
-	  	  
-	  if (!this.hasEmptyField(cards))
-	  {
-		  alert("Player has already 4 cards.");
-		  return;
-	  }
-			  
-	  var deck = this.item.data.data.cards;
-
-	  var card = deck.pop();
-	  if (!card) {
-		  alert("No card left");
-		  return;
-	  }
-	  
-	  this.setCard(player, card);
+	  var i;
+		for (i = 0; i < players.length; i++) {
+		await this.dealCardToSinglePlayer(players[i]) ;
+		} 	  
 	}
 	
 	hasEmptyField(cards) 
@@ -202,20 +294,23 @@ export class CastleFalkensteinMainDeckSheet extends ItemSheet {
 		return true;
 	}
 	
-	setCard(player, card) {
+	async setCard(player, card) {
 		var cards = player.data.data.cards;
 		
 		if (!cards.card0) {
-			player.update({"data.cards.card0" : card});			
+			await player.update({"data.cards.card0" : card});			
 		}
 		else if (!cards.card1) {
-			player.update({"data.cards.card1" : card});
+			await player.update({"data.cards.card1" : card});
 		}
 		else if (!cards.card2) {
-			player.update({"data.cards.card2" : card});
+			await player.update({"data.cards.card2" : card});
 		}
 		else if (!cards.card3) {
-			player.update({"data.cards.card3" : card});
+			await player.update({"data.cards.card3" : card});
+		}
+		else {
+			console.log("No slots for for" + player.name);
 		}
 	}	
 

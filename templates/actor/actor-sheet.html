@@ -104,7 +104,7 @@
 		{{#each data.cards as |card key|}}	
 		{{#ifNotUndefined card}}
 		<div class="flexrow flex-group-center">
-			<img src="systems/castlefalkenstein/templates/item/cards/{{card.value}}_of_{{card.suit}}.png" title="{{card.value}} of {{card.suit}}" style="width:100px;max-width:100px;height:145px;max-height:145px;" />
+			<img src="systems/castlefalkenstein/templates/item/cards/{{card.filename}}" title="{{card.value}} of {{card.suit}}" style="width:100px;max-width:100px;height:145px;max-height:145px;" />
 			<input id="{{@key}}" card-class="cardbox" type="checkbox" name="data.cards.{{key}}.selected" {{checked card.selected}}/>
 		</div>			
 		{{/ifNotUndefined}}		

@@ -1,0 +1,10 @@
+<form id="maindeck-dealing-dialog">
+    <p>{{ title }}</p>
+    <div class="form-group">
+		<select id="currentPlayerName" name="currentPlayerName">		
+        {{#each players as |player key|}}
+			<option value="{{player.name}}">{{player.name}}</option>
+		{{/each}}
+		</select>
+    </div>
+</form>
