@@ -25,7 +25,7 @@
     </header>
 		  
     {{!-- Sheet Tab Navigation --}}
-    <nav class="sheet-tabs tabs" data-group="skills">
+    <nav id="skill-nav" class="skills-nav tabs" data-group="skills">
 		<a class="item" data-tab="skills-spades">{{ localize 'CastleFalkenstein.Physical' }}
 		  <img class="suit" src="systems/castlefalkenstein/templates/actor/spades.png" title="Spades"/>
 		</a>
@@ -41,58 +41,58 @@
     </nav>		  
 	
     {{!-- Sheet Body --}}
-    <section class="sheet-body">
+    <section id="skill-body" class="skills-body">
 	
-		<div class="tab biography" data-group="skills" data-tab="skills-spades">
+		<div class="tab skills-spades" data-group="skills" data-tab="skills-spades">
 			<div class="skills grid grid-3col">
 			{{#each data.skills as |skill key|}}
 			{{#ifCond skill.suit "spades"}}
 			  <div class="skill flexrow flex-group-center">
 				<label for="data.skills.{{key}}.value" class="resource-label">{{ localizeSkill key}}</label>
 				<input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}" data-dtype="String"/>
-				<span class="rollable" id="skill-{{key}}">Roll</span>
+				<span class="rollable" id="skill-{{key}}" title="Play this skill with the selected cards">Play</span>
 			  </div>
 			{{/ifCond}}
 			{{/each}}
 			</div>
 		</div>
 		
-		<div class="tab biography" data-group="skills" data-tab="skills-diamonds">
+		<div class="tab skills-diamonds" data-group="skills" data-tab="skills-diamonds">
 			<div class="skills grid grid-3col">
 			{{#each data.skills as |skill key|}}
 			{{#ifCond skill.suit "diamonds"}}
 			  <div class="skill flexrow flex-group-center">
 				<label for="data.skills.{{key}}.value" class="resource-label">{{ localizeSkill key}}</label>
 				<input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}" data-dtype="String"/>
-				<span class="rollable" id="skill-{{key}}">Roll</span>>
+				<span class="rollable" id="skill-{{key}}" title="Play this skill with the selected cards">Play</span>
 			  </div>
 			{{/ifCond}}
 			{{/each}}
 			</div>
 		</div>
 		
-		<div class="tab biography" data-group="skills" data-tab="skills-hearts">		
+		<div class="tab skills-hearts" data-group="skills" data-tab="skills-hearts">		
 			<div class="skills grid grid-3col">
 			{{#each data.skills as |skill key|}}
 			{{#ifCond skill.suit "hearts"}}
 			  <div class="skill flexrow flex-group-center">
 				<label for="data.skills.{{key}}.value" class="resource-label">{{ localizeSkill key}}</label>
 				<input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}" data-dtype="String"/>
-				<span class="rollable" id="skill-{{key}}">Roll</span>
+				<span class="rollable" id="skill-{{key}}" title="Play this skill with the selected cards">Play</span>
 			  </div>
 			{{/ifCond}}
 			{{/each}}
 			</div>
 		</div>
 		
-		<div class="tab biography" data-group="skills" data-tab="skills-clubs">
+		<div class="tab skills-clubs" data-group="skills" data-tab="skills-clubs">
 			<div class="skills grid grid-3col">
 			{{#each data.skills as |skill key|}}
 			{{#ifCond skill.suit "clubs"}}
 			  <div class="skill flexrow flex-group-center">
 				<label for="data.skills.{{key}}.value" class="resource-label">{{ localizeSkill key}}</label>
 				<input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}" data-dtype="String"/>
-				<span class="rollable" id="skill-{{key}}">Roll</span>
+				<span class="rollable" id="skill-{{key}}" title="Play this skill with the selected cards">Play</span>
 			  </div>
 			{{/ifCond}}
 			{{/each}}
@@ -104,7 +104,7 @@
 		{{#each data.cards as |card key|}}	
 		{{#ifNotUndefined card}}
 		<div class="flexrow flex-group-center">
-			<img src="systems/castlefalkenstein/templates/actor/card-backside.png" title="{{card.value}} of {{card.suit}}" />
+			<img src="systems/castlefalkenstein/templates/item/cards/{{card.value}}_of_{{card.suit}}.png" title="{{card.value}} of {{card.suit}}" style="width:100px;max-width:100px;height:145px;max-height:145px;" />
 			<input id="{{@key}}" card-class="cardbox" type="checkbox" name="data.cards.{{key}}.selected" {{checked card.selected}}/>
 		</div>			
 		{{/ifNotUndefined}}		

@@ -10,8 +10,9 @@ export class CastleFalkensteinActorSheet extends ActorSheet {
       classes: ["castlefalkenstein", "sheet", "actor"],
       template: "systems/castlefalkenstein/templates/actor/actor-sheet.html",
       width: 800,
-      height: 600,
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
+      height: 800,
+      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" },
+			 { navSelector: ".skills-nav", contentSelector: ".skills-body", initial: "skills-spades" }]
     });
   }
 
@@ -29,7 +30,7 @@ export class CastleFalkensteinActorSheet extends ActorSheet {
 
   /** @override */
   activateListeners(html) {
-    super.activateListeners(html);
+    super.activateListeners(html);		
 
     // Everything below here is only needed if the sheet is editable
     if (!this.options.editable) return;

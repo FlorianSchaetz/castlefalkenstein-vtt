@@ -180,9 +180,21 @@
   flex: 0;
 }
 
+.castlefalkenstein .skill-nav {
+  -webkit-box-flex: 0;
+  -ms-flex: 0;
+  flex: 0;
+}
+
 .castlefalkenstein .sheet-body,
 .castlefalkenstein .sheet-body .tab,
 .castlefalkenstein .sheet-body .tab .editor {
+  height: 100%;
+}
+
+.castlefalkenstein .skills-body,
+.castlefalkenstein .skills-body .tab,
+.castlefalkenstein .skills-body .tab .editor {
   height: 100%;
 }
 
