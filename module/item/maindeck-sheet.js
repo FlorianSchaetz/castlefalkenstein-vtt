@@ -75,9 +75,50 @@ export class CastleFalkensteinMainDeckSheet extends ItemSheet {
 	this.item.update( { "data.cards" : mainDeck } );
 	
   }
-  
-  async updatePlayer(player, obj) {
-	  player.update(obj);
+
+  createMainDeckWithoutPlayerCards()
+  {
+	 var mainDeck = this.createDeck();
+	 var playerCards = this.getAllPlayerCards();
+	 
+	 while(playerCards.length > 0) 
+	 {
+		 var card = playerCards.pop();
+		 for(var i=0; i<mainDeck.length; i++) 
+		 {
+			 var mainDeckCard = mainDeck[i];
+			 if (mainDeckCard.filename === card.filename) {
+				 mainDeck.splice(i,1);
+				break;				 
+			 }
+		 }		 
+	 }
+	 
+	 this.item.update( { "data.cards" : mainDeck } );
+	 this.item.update( { "data.description" : mainDeck.map(c => c.name).join("<br/>") } );
+  }	  
+
+  getAllPlayerCards() 
+  {
+	  var playerCards = [];
+	  var players = this.getPlayers();	
+	  players.forEach( (p) => {
+		var cards = p.data.data.cards;
+		
+		if (cards.card0) {
+			playerCards.push(cards.card0);
+		}
+		if (cards.card1) {
+			playerCards.push(cards.card1);
+		}
+		if (cards.card2) {
+			playerCards.push(cards.card2);
+		}
+		if (cards.card3) {
+			playerCards.push(cards.card3);
+		}
+	  });
+	  return playerCards;
   }
   
    createDeck()
@@ -91,7 +132,9 @@ export class CastleFalkensteinMainDeckSheet extends ItemSheet {
 		} 
 		
 		deck.push(this.createCard(14, "joker"));
-		deck.push(this.createCard(14, "joker"));
+		var blackjoker = this.createCard(14, "joker");
+		blackjoker.filename = "black_joker.png";
+		deck.push(blackjoker);
 		
 		this.shuffle(deck);
 		return deck;		
@@ -216,6 +259,11 @@ export class CastleFalkensteinMainDeckSheet extends ItemSheet {
 		  
 		  return;
 	  }	  
+	  
+	  if (element.id === "initializemaindeck") {
+		  this.createMainDeckWithoutPlayerCards();
+		  return;
+		}
 	  
 	  console.error("Unhandled event in maindeck-sheet.js: %s", event);	  
 	}
