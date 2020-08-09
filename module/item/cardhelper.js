@@ -24,6 +24,15 @@
 		players.forEach( (p) => p.update( { "-=data.cards.card3" : null } ) );	
 	}
 	
+		
+	/**
+	 * Clears the decks of all actors that are of type "character"
+	 */
+	export const emptyPlayerSorceryDecks = function() {
+		var players = getPlayers();	
+		players.forEach( (p) => p.update( { "data.gatheredpower" : [] } ) );					
+	}
+	
 	/**
 	 * @returns {boolean} true, if the given player actor has a free slot in their card deck
 	 */
@@ -64,6 +73,18 @@
 		}
 	}	
 	
+		/**
+	 * Deals a given card to the player actor's sorcery card list. 
+	 *
+	 * @param {CastleFalkensteinActor} player The player to deal the card to
+	 * @param {object} card The card to deal
+	 */
+	export const dealSorceryCard = async function(player, card) {
+		var cards = player.data.data.gatheredpower.slice();		
+		cards.push(card);		
+		await player.update({"data.gatheredpower" : cards});					
+	}	
+	
 	/**
 	 * This method deals cards from the given deck to the given player actor until they have no free slots in their card deck left.
 	 *
@@ -89,6 +110,31 @@
 			console.log("Dealt " + card.name + "to " + player.name);
 			await dealCard(player, card);			
 		}
+	}
+	
+	/**
+	 * This method deals cards from the given deck to the given player actor until they have no free slots in their card deck left.
+	 *
+	 * @param {array} deck The array of cards to take deal the cards from
+	 * @param {CastleFalkensteinActor} player The player actor to deal the cards to
+	 */
+	export const dealSorceryCardToPlayer = async function(deck, player)
+	{
+		if (!player)
+		{
+			alert("No player");
+			return;
+		}	  
+		
+		var card = deck.pop();
+		if (!card) {
+			alert("No card left");
+			return;
+		}
+		
+		await dealSorceryCard(player, card);			
+		
+		console.log("Dealt " + card.name + "to sorcery card list " + player.name);		
 	}
 	
 	/**

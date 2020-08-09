@@ -9,6 +9,7 @@
                     "max": 10
                 },
                 "fairy": false,
+				"sorcerer" : false,
                 "skills": {
                     "athletics": {
                         "value": "AV",

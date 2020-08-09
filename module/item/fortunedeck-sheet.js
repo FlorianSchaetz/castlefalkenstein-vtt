@@ -159,7 +159,7 @@ export class CastleFalkensteinFortuneDeckSheet extends ItemSheet {
 			if (p.name == chosenPlayerName) 
 			{
 				var deck = this.item.data.data.cards;
-				cardhelper.dealCardsToPlayer(deck, p);
+				cardhelper.dealSorceryCardToPlayer(deck, p);
 				this.updateCardsAsync(deck);
 			}
 			
