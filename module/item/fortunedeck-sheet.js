@@ -5,12 +5,12 @@ import * as cardhelper from "../item/cardhelper.js";
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
  */
-export class CastleFalkensteinMainDeckSheet extends ItemSheet {
+export class CastleFalkensteinFortuneDeckSheet extends ItemSheet {
 
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["castlefalkenstein", "sheet", "item", "maindeck"],
+      classes: ["castlefalkenstein", "sheet", "item", "fortunedeck"],
       width: 520,
       height: 480,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
@@ -21,7 +21,7 @@ export class CastleFalkensteinMainDeckSheet extends ItemSheet {
   get template() {
     const path = "systems/castlefalkenstein/templates/item";
     // Return a single sheet for all item types.
-    return `${path}/maindeck-sheet.html`;
+    return `${path}/fortunedeck-sheet.html`;
     // Alternatively, you could use the following return statement to do a
     // unique item sheet by type, like `weapon-sheet.html`.
 

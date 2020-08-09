@@ -209,7 +209,7 @@
         }
     },
     "Item": {
-        "types": ["item", "maindeck", "playerdeck"],
+        "types": ["item", "fortunedeck", "sorcerydeck"],
         "templates": {
             "base": {
                 "description": ""
@@ -220,18 +220,14 @@
             "quantity": 1,
             "weight": 0
         },
-        "maindeck": {
+        "fortunedeck": {
             "templates": ["base"],
             "quantity": 1,
             "weight": 0,
-            "cards": [{
-                    "value": 6,
-                    "suit": "spades"
-                }
-            ]
+            "cards": []
 
         },
-        "playerdeck": {
+        "sorcerydeck": {
             "templates": ["base"],
             "quantity": 1,
             "weight": 0,
